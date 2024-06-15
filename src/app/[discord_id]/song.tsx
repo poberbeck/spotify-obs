@@ -59,7 +59,23 @@ interface SongProps {
 }
 
 const Song = ({ discord_id }: SongProps) => {
-  const data = useThrottle(useLanyardWS(discord_id));
+  const data = useThrottle(
+    useLanyardWS(
+      discord_id,
+      process.env.NEXT_PUBLIC_LANYARD_URL
+        ? {
+            api: {
+              hostname: new URL(process.env.NEXT_PUBLIC_LANYARD_URL).hostname,
+              secure:
+                new URL(process.env.NEXT_PUBLIC_LANYARD_URL).protocol ===
+                "https:"
+                  ? true
+                  : false,
+            },
+          }
+        : undefined,
+    ),
+  );
 
   const opts = useSearchParams();
 
