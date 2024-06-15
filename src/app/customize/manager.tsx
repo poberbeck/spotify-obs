@@ -284,8 +284,8 @@ function TextOnly({
   );
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_DEVELOPMENT
-  ? "http://localhost:3000/"
+const BASE_URL = process.env.NEXT_PUBLIC_URL
+  ? new URL(process.env.NEXT_PUBLIC_URL).toString()
   : "https://spotify-obs.com/";
 
 function Manager() {
